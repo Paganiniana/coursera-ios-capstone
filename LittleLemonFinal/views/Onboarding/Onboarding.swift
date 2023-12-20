@@ -32,7 +32,7 @@ struct Onboarding: View {
                 
                 VStack {
                     Text("Welcome")
-//                        .font(.markazi)
+                        .font(.markazi)
                         
                         
                     Image("LogoLarge")

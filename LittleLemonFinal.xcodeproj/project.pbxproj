@@ -32,6 +32,7 @@
 		D460BA3A2B33453C0002BFA4 /* Customer+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D460BA312B33453C0002BFA4 /* Customer+CoreDataProperties.swift */; };
 		D460BA3B2B33453C0002BFA4 /* FetchedObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = D460BA322B33453C0002BFA4 /* FetchedObjects.swift */; };
 		D460BA3C2B33453C0002BFA4 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D460BA332B33453C0002BFA4 /* Location+CoreDataClass.swift */; };
+		D4F802692B33B5CC00FF684D /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F802682B33B5CB00FF684D /* Styles.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		D460BA312B33453C0002BFA4 /* Customer+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Customer+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D460BA322B33453C0002BFA4 /* FetchedObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedObjects.swift; sourceTree = "<group>"; };
 		D460BA332B33453C0002BFA4 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D4F802682B33B5CB00FF684D /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				D460B9F22B325CC90002BFA4 /* views */,
 				D460B9F12B325CC30002BFA4 /* data */,
 				D460B9DD2B325A4C0002BFA4 /* LittleLemonFinalApp.swift */,
+				D4F802682B33B5CB00FF684D /* Styles.swift */,
 				D460B9E12B325A4E0002BFA4 /* Assets.xcassets */,
 				D460B9E32B325A4E0002BFA4 /* Preview Content */,
 			);
@@ -261,6 +264,7 @@
 				D460BA352B33453C0002BFA4 /* Location+CoreDataProperties.swift in Sources */,
 				D460BA342B33453C0002BFA4 /* Customer+CoreDataClass.swift in Sources */,
 				D460BA182B3263BC0002BFA4 /* Menu.swift in Sources */,
+				D4F802692B33B5CC00FF684D /* Styles.swift in Sources */,
 				D460BA1C2B3264380002BFA4 /* MenuSelector.swift in Sources */,
 				D460B9E72B325A4E0002BFA4 /* Persistence.swift in Sources */,
 				D460B9DE2B325A4C0002BFA4 /* LittleLemonFinalApp.swift in Sources */,
