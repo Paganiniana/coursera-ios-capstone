@@ -6,90 +6,47 @@
 //
 
 import Foundation
+import CoreData
 
-
-protocol MenuItemProtocol: Identifiable {
-    var id: UUID { get }
-    var price: Double { get }
-    var title: String { get }
-    var orderCount: Int { get set }
-    var ingredients: [Ingredient] { get set }
+public struct MenuList: Codable {
+    let menu: [MenuItem]
 }
 
-public struct MenuItem: MenuItemProtocol, Hashable {
-    public init(title:String, ingredients: [Ingredient]) {
-        self.title = title
-        self.ingredients = ingredients;
-    }
-    
-    public var id = UUID()
-    var price = round(Double.random(in: 0...10) * 100) / 100.0 // initialize with random price
-    
-    var title: String;
-    public func getTitle() -> String {
-        return self.title;
-    }
-    
-    
-    var orderCount = Int.random(in: 0...1000); // initialize with some number
-    
-    var ingredients: [Ingredient] = [];
-    public func getIngredients() -> [Ingredient] {
-        return self.ingredients;
-    }
+public struct MenuItem: Hashable, Codable {
+    var id: Int;
+    let title: String;
+    let price: String;
+    let image: String;
+    let description: String;
+    let category: String;
 }
 
-public class MenuViewViewModel {
-    let foodNames: [String] = ["Pasta", "Chicken Picata", "Burritos", "Chimichangas", "Salad", "BLT Sandwiches", "Dolmades", "Greek Salad", "Bread Bowl", "Chowder", "Fish and Chips", "Grilled Chees"];
-    let drinkNames = ["Water", "Tea", "Coffee", "Milk", "Coca Cola", "Pepsi", "Gin & Tonic", "Beer"]
-    let desertNames = ["Ice Cream", "Ice Cream Sandwich", "Cheesecake", "Cake"]
+fileprivate let menuTarget = "https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/menu.json";
+
+@MainActor
+class DishesModel: ObservableObject {
+    @Published var menuItems = [MenuItem]();
     
-    public init() {
+    func reload(_ coreDataContext: NSManagedObjectContext) async {
+        let url = URL(string: menuTarget)!
+        let urlSession = URLSession.shared
+        
+        do {
+            let (data, _) = try await urlSession.data(from: url)
+            let fullMenu = try JSONDecoder().decode(MenuList.self, from: data);
+            menuItems = fullMenu.menu;
+        
+            
+            // populate Core Data
+            Dish.deleteAll(coreDataContext)
+            Dish.createDishesFrom(menuItems:menuItems, coreDataContext)
+        }
+        catch let DecodingError.dataCorrupted(context) {
+            print("We couldn't decode the JSON: \(context.debugDescription)");
+        }
+        catch let e as NSError {
+            print("There was some other problem: \(e.localizedDescription)");
+        }
         
     }
-    
-    public func getMenuItems(category: MenuCategory) -> [MenuItem] {
-        switch category {
-            case .drink:
-                return getDrinkItems()
-            case .food:
-                return getFoodItems()
-            case .desert:
-                return getDesertItems()
-        }
-    }
-    
-    func getFoodItems() -> [MenuItem] {
-        return foodNames.map {
-            MenuItem(
-                title:$0,
-                ingredients: [
-                    Ingredient.allCases.randomElement()!,
-                    Ingredient.allCases.randomElement()!,
-                    Ingredient.allCases.randomElement()!
-                ]
-            )
-        }
-    }
-
-    func getDesertItems() -> [MenuItem] {
-        return desertNames.map {
-            MenuItem(
-                title:$0,
-                ingredients: []
-            )
-        }
-    }
-
-    func getDrinkItems() -> [MenuItem] {
-        return drinkNames.map {
-            MenuItem(
-                title:$0,
-                ingredients: []
-            )
-        }
-    }
-
 }
-
-

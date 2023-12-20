@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+let kIsLoggedIn = "userLoggedIn"
 let kFirstName = "userFirstName"
 let kLastName = "userLastName"
 let kEmail = "userEmail"
@@ -41,10 +42,16 @@ struct Onboarding: View {
                         UserDefaults.standard.set(firstName, forKey: kFirstName);
                         UserDefaults.standard.set(lastName, forKey: kLastName);
                         UserDefaults.standard.set(email, forKey: kEmail);
+                        UserDefaults.standard.set(true, forKey: kIsLoggedIn);
                         
                         // set logged in
                         isLoggedIn = true;
                     }
+                }
+            }
+            .onAppear {
+                if (UserDefaults.standard.bool(forKey: kIsLoggedIn)) {
+                    isLoggedIn = true
                 }
             }
         }

@@ -16,6 +16,6 @@ struct MenuSelector: View {
 }
 
 #Preview {
-    @State var localSelected: MenuCategory = .food;
+    @State var localSelected: MenuCategory = .main;
     return MenuSelector(selected: $localSelected);
 }

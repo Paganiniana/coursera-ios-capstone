@@ -9,15 +9,24 @@ import SwiftUI
 
 struct MenuItemList: View {
     
-    @Binding var menuItems: [MenuItem];
+    var dishes: [Dish];
     
     var body: some View {
-        Text("Menu Item List")
+        List {
+            ForEach(dishes) { dish in
+                HStack {
+                    Text(dish.name ?? "")
+                    Text(dish.textDescription)
+                    Text(dish.formatPrice())
+//                    AsyncImage(url: URL(string:dish.image ?? ""))
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    @State var localMenuList: [MenuItem] = [];
+    @State var localMenuList: [Dish] = [];
     
-    return MenuItemList(menuItems: $localMenuList);
+    return MenuItemList(dishes: localMenuList);
 }

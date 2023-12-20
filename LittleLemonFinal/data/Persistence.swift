@@ -13,6 +13,9 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
+
+        
+        
 //        for _ in 0..<10 {
 //            let newItem = Item(context: viewContext)
 //            newItem.timestamp = Date()
@@ -44,5 +47,12 @@ struct PersistenceController {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+    }
+    
+    func clear() {
+        // Delete all dishes from the store
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Dish")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        let _ = try? container.persistentStoreCoordinator.execute(deleteRequest, with: container.viewContext)
     }
 }
