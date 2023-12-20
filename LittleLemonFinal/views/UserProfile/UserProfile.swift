@@ -17,17 +17,35 @@ struct UserProfile: View {
     
     var body: some View {
         VStack {
-            Text("Personal Information")
-            Image("Profile")
-            Text(firstName);
-            Text(lastName);
-            Text(email);
-            Button("Log Out") {
-                UserDefaults.standard.set(false, forKey: kIsLoggedIn);
-                self.presentation.wrappedValue.dismiss();
+            HStack {
+                Image("Profile")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height:200)
+                VStack(alignment: .leading) {
+                    Text("\(firstName) \(lastName)")
+                        .bold()
+                    Text(email)
+                }
             }
-            Spacer()
+            Button(action: logout) {
+                Text("Log Out")
+                    .frame(maxWidth: .infinity, maxHeight: 48)
+                    .background(.lemonYellow)
+                    .cornerRadius(12)
+            }
+            .foregroundColor(.black)
         }
+        .frame(alignment:.topLeading)
+        .padding()
+        
+    }
+    
+    
+    
+    func logout() {
+        UserDefaults.standard.set(false, forKey: kIsLoggedIn);
+        self.presentation.wrappedValue.dismiss();
     }
 }
 

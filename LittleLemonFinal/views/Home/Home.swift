@@ -21,24 +21,6 @@ struct Home: View {
                 .tabItem { Label("Profile", systemImage: "square.and.pencil") }
         }
         .navigationBarBackButtonHidden(true)
-        
-        
-//        NavigationView {
-//            MenuItemsView(sectionsToShow: $sectionsToShow)
-//                .navigationTitle("Home")
-//                .navigationBarTitleDisplayMode(.large)
-//                .toolbar {
-//                    Button("", systemImage: "slider.horizontal.3") {
-//                        showSettings = true
-//                    }
-//                }
-//                .sheet(isPresented: $showSettings){
-//                    MenuItemOptionView(
-//                        selectedCategory:$sectionsToShow,
-//                        selectedSort: $sort
-//                    )
-//                }
-//        }
     }
 }
 

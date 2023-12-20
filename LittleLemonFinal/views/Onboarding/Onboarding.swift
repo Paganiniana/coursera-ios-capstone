@@ -30,6 +30,17 @@ struct Onboarding: View {
                     EmptyView()
                 }
                 
+                VStack {
+                    Text("Welcome")
+//                        .font(.markazi)
+                        
+                        
+                    Image("LogoLarge")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 300)
+                }
+                .foregroundColor(.lemonYellow)
                 
                 TextField("First Name", text:$firstName)
                 TextField("Last Name", text:$lastName)
