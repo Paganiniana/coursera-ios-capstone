@@ -14,6 +14,7 @@ let kEmail = "userEmail"
 struct Onboarding: View {
     @Environment(\.managedObjectContext) private var viewContext;
 
+    @State var isLoggedIn:Bool = false;
     
     @State var firstName:String = "";
     @State var lastName:String = "";
@@ -22,18 +23,28 @@ struct Onboarding: View {
     
     
     var body: some View {
-        VStack {
-            TextField("First Name", text:$firstName)
-            TextField("Last Name", text:$lastName)
-            TextField("Email", text:$email)
-            Button("Perform Registration!") {
-                // make sure fields aren't empty
-                if !firstName.isEmpty && !lastName.isEmpty
-                    && !email.isEmpty {
-                    // store name & email in UserDefaults
-                    UserDefaults.standard.set(firstName, forKey: kFirstName);
-                    UserDefaults.standard.set(lastName, forKey: kLastName);
-                    UserDefaults.standard.set(email, forKey: kEmail);
+        NavigationView {
+            VStack {
+                NavigationLink(destination: Home(), isActive: $isLoggedIn) {
+                    EmptyView()
+                }
+                
+                
+                TextField("First Name", text:$firstName)
+                TextField("Last Name", text:$lastName)
+                TextField("Email", text:$email)
+                Button("Perform Registration!") {
+                    // make sure fields aren't empty
+                    if !firstName.isEmpty && !lastName.isEmpty
+                        && !email.isEmpty {
+                        // store name & email in UserDefaults
+                        UserDefaults.standard.set(firstName, forKey: kFirstName);
+                        UserDefaults.standard.set(lastName, forKey: kLastName);
+                        UserDefaults.standard.set(email, forKey: kEmail);
+                        
+                        // set logged in
+                        isLoggedIn = true;
+                    }
                 }
             }
         }
