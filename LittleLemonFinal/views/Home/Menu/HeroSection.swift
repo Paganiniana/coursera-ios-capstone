@@ -41,6 +41,7 @@ struct HeroSection: View {
                         .frame(width: 100, height: 100)
                 }
                 TextField("Search...", text:$searchText)
+                    .font(.karla)
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: 48)
                     .background(.white)

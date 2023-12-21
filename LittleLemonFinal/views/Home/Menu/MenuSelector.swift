@@ -12,25 +12,18 @@ struct MenuSelector: View {
     
     var body: some View {
         HStack {
-            Button(action: { setValue(.main)}) {
-                ZStack {
-                    Rectangle()
-                        .foregroundColor(.lightGray)
-                    Text(MenuCategory.main.rawValue)
+            ForEach(MenuCategory.allCases, id:\.self) { category in
+                Button(action: { setValue(category)}) {
+                    Text(category.rawValue)
+                        .font(.karla)
+                        .frame(maxWidth: .infinity, maxHeight: 30)
+                        .background(category == selected ? .gray : .lightGray)
+                        .cornerRadius(12)
                 }
-                .frame(minWidth: .infinity, minHeight: 30)
+                .foregroundColor(.black)
             }
-//            .frame(minWidth: .infinity, minHeight: 30)
-//            Spacer()
-//            Button(MenuCategory.starter.rawValue) {
-//                selected = MenuCategory.dessert;
-//            }
-//            Spacer()
-//            Button(MenuCategory.dessert.rawValue) {
-//                selected = MenuCategory.dessert;
-//            }
         }
-        padding()
+        .padding()
     }
     
     func setValue(_ opt: MenuCategory) {

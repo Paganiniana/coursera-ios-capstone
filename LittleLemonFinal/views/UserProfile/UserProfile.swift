@@ -17,19 +17,22 @@ struct UserProfile: View {
     
     var body: some View {
         VStack {
-            HStack {
+            HStack(alignment: .top) {
                 Image("Profile")
                     .resizable()
                     .scaledToFit()
                     .frame(height:200)
                 VStack(alignment: .leading) {
                     Text("\(firstName) \(lastName)")
-                        .bold()
+                        .font(.karlaSubtitle)
                     Text(email)
+                        .font(.karla)
                 }
             }
+            .frame(alignment: .leading)
             Button(action: logout) {
                 Text("Log Out")
+                    .font(.karlaBold)
                     .frame(maxWidth: .infinity, maxHeight: 48)
                     .background(.lemonYellow)
                     .cornerRadius(12)

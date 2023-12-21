@@ -21,4 +21,7 @@ extension Font {
     static var karlaBold: Font {
         Font.custom("Karla-Bold", size: 14)
     }
+    static var karlaSubtitle: Font {
+        Font.custom("Karla-Bold", size: 18)
+    }
 }
