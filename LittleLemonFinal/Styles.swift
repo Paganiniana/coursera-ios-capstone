@@ -9,7 +9,16 @@ import Foundation
 import SwiftUI
 
 extension Font {
-    static var markazi: Font {
-        Font.custom("MarkaziText-Bold", size: 24)
+    static var markaziTitle1: Font {
+        Font.custom("MarkaziText-Bold", size: 48)
+    }
+    static var markaziTitle2: Font {
+        Font.custom("MarkaziText-Bold", size: 36)
+    }
+    static var karla: Font {
+        Font.custom("Karla-Regular", size: 14)
+    }
+    static var karlaBold: Font {
+        Font.custom("Karla-Bold", size: 14)
     }
 }

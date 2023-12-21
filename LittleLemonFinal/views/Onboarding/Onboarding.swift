@@ -22,6 +22,21 @@ struct Onboarding: View {
     @State var email:String = "";
     
     
+    func finishRegistration() {
+        // make sure fields aren't empty
+        if !firstName.isEmpty && !lastName.isEmpty
+            && !email.isEmpty {
+            // store name & email in UserDefaults
+            UserDefaults.standard.set(firstName, forKey: kFirstName);
+            UserDefaults.standard.set(lastName, forKey: kLastName);
+            UserDefaults.standard.set(email, forKey: kEmail);
+            UserDefaults.standard.set(true, forKey: kIsLoggedIn);
+            
+            // set logged in
+            isLoggedIn = true;
+        }
+    }
+    
     
     var body: some View {
         NavigationView {
@@ -32,33 +47,48 @@ struct Onboarding: View {
                 
                 VStack {
                     Text("Welcome")
-                        .font(.markazi)
+                        .font(.markaziTitle1)
                         
                         
                     Image("LogoLarge")
                         .resizable()
                         .scaledToFit()
                         .frame(height: 300)
+                    Spacer(minLength: 50)
+                    ZStack {
+                        Rectangle()
+                            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: 400)
+                            .foregroundStyle(.accentGreen)
+                        VStack {
+                            TextField("First Name", text:$firstName)
+                                .padding()
+                                .frame(maxWidth: .infinity, maxHeight: 48)
+                                .background(.white)
+                                .cornerRadius(12)
+                            TextField("Last Name", text:$lastName)
+                                .padding()
+                                .frame(maxWidth: .infinity, maxHeight: 48)
+                                .background(.white)
+                                .cornerRadius(12)
+                            TextField("Email", text:$email)
+                                .padding()
+                                .frame(maxWidth: .infinity, maxHeight: 48)
+                                .background(.white)
+                                .cornerRadius(12)
+                            Button(action: finishRegistration) {
+                                Text("Register")
+                                    .frame(maxWidth: .infinity, maxHeight: 48)
+                                    .background(.lemonYellow)
+                                    .cornerRadius(12)
+                            }
+                            .foregroundColor(.black)
+                        }
+                        .padding()
+                    }
+                    .frame(maxWidth: .infinity)
+                    .ignoresSafeArea()
                 }
                 .foregroundColor(.lemonYellow)
-                
-                TextField("First Name", text:$firstName)
-                TextField("Last Name", text:$lastName)
-                TextField("Email", text:$email)
-                Button("Perform Registration!") {
-                    // make sure fields aren't empty
-                    if !firstName.isEmpty && !lastName.isEmpty
-                        && !email.isEmpty {
-                        // store name & email in UserDefaults
-                        UserDefaults.standard.set(firstName, forKey: kFirstName);
-                        UserDefaults.standard.set(lastName, forKey: kLastName);
-                        UserDefaults.standard.set(email, forKey: kEmail);
-                        UserDefaults.standard.set(true, forKey: kIsLoggedIn);
-                        
-                        // set logged in
-                        isLoggedIn = true;
-                    }
-                }
             }
             .onAppear {
                 if (UserDefaults.standard.bool(forKey: kIsLoggedIn)) {
@@ -66,6 +96,9 @@ struct Onboarding: View {
                 }
             }
         }
+        
+        
+        
     }
 }
 

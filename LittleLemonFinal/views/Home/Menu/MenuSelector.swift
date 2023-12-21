@@ -11,7 +11,30 @@ struct MenuSelector: View {
     @Binding var selected: MenuCategory;
     
     var body: some View {
-        Text("Menu Category Selector")
+        HStack {
+            Button(action: { setValue(.main)}) {
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(.lightGray)
+                    Text(MenuCategory.main.rawValue)
+                }
+                .frame(minWidth: .infinity, minHeight: 30)
+            }
+//            .frame(minWidth: .infinity, minHeight: 30)
+//            Spacer()
+//            Button(MenuCategory.starter.rawValue) {
+//                selected = MenuCategory.dessert;
+//            }
+//            Spacer()
+//            Button(MenuCategory.dessert.rawValue) {
+//                selected = MenuCategory.dessert;
+//            }
+        }
+        padding()
+    }
+    
+    func setValue(_ opt: MenuCategory) {
+        selected = opt;
     }
 }
 

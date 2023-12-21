@@ -19,7 +19,7 @@ struct Menu: View {
     
     var body: some View {
         VStack {
-            HeroSection()
+            HeroSection(searchText: $searchText)
             MenuSelector(selected: $menu)
             FetchedObjects(predicate: getSearchPredicate()) { (dishes: [Dish]) in
                 MenuItemList(dishes: dishes);

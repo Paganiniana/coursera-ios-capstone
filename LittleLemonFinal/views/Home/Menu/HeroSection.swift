@@ -12,15 +12,48 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 """
 
 struct HeroSection: View {
+    
+    @Binding var searchText:String;
+    
+    
     var body: some View {
-        VStack {
-            Text("Little Lemon")
-            Text("Portland")
-            Text(descriptionText)
+        ZStack {
+            Rectangle()
+                .foregroundColor(.accentGreen)
+            VStack {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Little Lemon")
+                            .font(.markaziTitle1)
+                            .foregroundStyle(.lemonYellow)
+                            
+                        Text("Portland")
+                            .font(.markaziTitle2)
+                            .foregroundStyle(.white)
+                                
+                        Text(descriptionText)
+                            .font(.karla)
+                            .foregroundStyle(.white)
+                    }
+                    Image("Bruschetta")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
+                }
+                TextField("Search...", text:$searchText)
+                    .padding()
+                    .frame(maxWidth: .infinity, maxHeight: 48)
+                    .background(.white)
+                    .cornerRadius(12)
+                
+            }
+            .padding()
         }
+        
     }
 }
 
 #Preview {
-    HeroSection()
+    @State var localSearch:String = "";
+    return HeroSection(searchText: $localSearch)
 }
